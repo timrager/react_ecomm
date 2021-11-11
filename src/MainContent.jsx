@@ -6,11 +6,11 @@ class MainContent extends Component {
         pageTitle: "Customers",
         customerCount: 5,
         customers: [
-            { id: 1, name: "Scott", phone: "123-2345", address: {city: "Seattle", state: "WA"} },
-            { id: 2, name: "Brad", phone: "123-3456", address: {city: "Tacoma", state: "WA"} },
-            { id: 3, name: "Jake", phone: null, address: {city: "Bellingham", state: "WA"} },
-            { id: 4, name: "Todd", phone: "123-5678", address: {city: "Pasco", state: "WA"} },
-            { id: 5, name: "Albert", phone: null, address: {city: "Tri-Cities", state: "WA"} },
+            { id: 1, name: "Scott", phone: "123-2345", address: {city: "Seattle", state: "WA"}, photo: "https://picsum.photos/id/1010/60" },
+            { id: 2, name: "Brad", phone: "123-3456", address: {city: "Tacoma", state: "WA"}, photo: "https://picsum.photos/id/1020/60" },
+            { id: 3, name: "Jake", phone: null, address: {city: "Bellingham", state: "WA"}, photo: "https://picsum.photos/id/1060/60" },
+            { id: 4, name: "Todd", phone: "123-5678", address: {city: "Pasco", state: "WA"}, photo: "https://picsum.photos/id/1040/60" },
+            { id: 5, name: "Albert", phone: null, address: {city: "Tri-Cities", state: "WA"}, photo: "https://picsum.photos/id/1050/60" },
         ]
     };
 
@@ -28,6 +28,7 @@ class MainContent extends Component {
             return (
                 <tr key={customer.id}>
                     <td>{customer.id}</td>
+                    <td><img src={customer.photo} alt="Customer"/></td>
                     <td>{customer.name}</td>
                     <td>{customer.address.city}</td>
                     <td>{this.getPhoneNumber(customer)}</td>
@@ -50,6 +51,7 @@ class MainContent extends Component {
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Photo</th>
                             <th>Customer Name</th>
                             <th>City</th>
                             <th>Phone</th>
