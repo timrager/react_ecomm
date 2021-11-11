@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react';
 
 class MainContent extends Component {
 
@@ -20,10 +19,21 @@ class MainContent extends Component {
         this.setState({ customerCount: 7 })
     };
     
-    getPhoneNumber = () => {
-        {
-            return customer.phone ? customer.phone : <div className="bg-warning p-2 text-center">N/A</div>
-        }
+    getPhoneNumber = (customer) => {
+        return customer.phone ? customer.phone : <div className="bg-warning p-2 text-center">N/A</div>
+    }
+
+    displayCustomers = () => {
+        return this.state.customers.map( (customer) => {
+            return (
+                <tr key={customer.id}>
+                    <td>{customer.id}</td>
+                    <td>{customer.name}</td>
+                    <td>{customer.address.city}</td>
+                    <td>{this.getPhoneNumber(customer)}</td>
+                </tr>
+            )
+        })
     }
 
     render() {
@@ -45,18 +55,7 @@ class MainContent extends Component {
                             <th>Phone</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {this.state.customers.map( (customer) => {
-                            return (
-                                <tr key={customer.id}>
-                                    <td>{customer.id}</td>
-                                    <td>{customer.name}</td>
-                                    <td>{customer.address.city}</td>
-                                    <td>{getPhoneNumber()}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
+                    <tbody>{this.displayCustomers()}</tbody>
                 </table>
             </div>
         )
