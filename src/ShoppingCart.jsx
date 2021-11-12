@@ -52,7 +52,7 @@ class ShoppingCart extends Component {
                 <div className="row">
                     {this.state.products.map( (product) => {
                         return (
-                            <Product key={product.id} product={product} onIncrement={this.handleIncrement} onDecrement={this.handleDecrement}>
+                            <Product key={product.id} product={product} onIncrement={this.handleIncrement} onDecrement={this.handleDecrement} onDelete={this.handleDelete}>
                                 <button className="btn btn-primary">Buy Now</button>
                             </Product>
                         )
@@ -79,6 +79,19 @@ class ShoppingCart extends Component {
         allProducts[index].quantity > 0 ? allProducts[index].quantity-- : allProducts[index].quantity = 0;
 
         this.setState({products: allProducts})
+    }
+
+    handleDelete = (product) => {
+        let allProducts = [...this.state.products];
+        let index = allProducts.indexOf(product);
+
+        if (window.confirm("Are you sure?")) {
+
+            allProducts.splice(index, 1);
+
+            this.setState({ products: allProducts });
+            
+        }
     }
 
 }
