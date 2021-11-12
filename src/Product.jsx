@@ -6,6 +6,10 @@ class Product extends Component {
         product: this.props.product
     }
 
+    componentWillUnmount() {
+        console.log('unmount');
+    }
+
     render() {
         return (
             <div className="col-md-6">
