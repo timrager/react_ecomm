@@ -52,7 +52,7 @@ class ShoppingCart extends Component {
                 <div className="row">
                     {this.state.products.map( (product) => {
                         return (
-                            <Product key={product.id} product={product}>
+                            <Product key={product.id} product={product} onIncrement={this.handleIncrement} onDecrement={this.handleDecrement}>
                                 <button className="btn btn-primary">Buy Now</button>
                             </Product>
                         )
@@ -60,6 +60,25 @@ class ShoppingCart extends Component {
                 </div>
             </div>
         )
+    }
+
+    handleIncrement = (product) => {
+
+        let allProducts = [...this.state.products];
+        let index = allProducts.indexOf(product);
+
+        allProducts[index].quantity < 10 ? allProducts[index].quantity++ : allProducts[index].quantity = 10;
+
+        this.setState({products: allProducts})
+    }
+
+    handleDecrement = (product) => {
+        let allProducts = [...this.state.products];
+        let index = allProducts.indexOf(product);
+
+        allProducts[index].quantity > 0 ? allProducts[index].quantity-- : allProducts[index].quantity = 0;
+
+        this.setState({products: allProducts})
     }
 
 }
