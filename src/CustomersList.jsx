@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MainContent extends Component {
+class CustomersList extends Component {
 
     state = {
         pageTitle: "Customers",
@@ -23,12 +23,24 @@ class MainContent extends Component {
         return customer.phone ? customer.phone : <div className="bg-warning p-2 text-center">N/A</div>
     }
 
+    changePic = (customer, index) => {
+        var customerArray = this.state.customers;
+        customerArray[index].photo = "https://picsum.photos/id/104/60"
+
+        this.setState( {customers: customerArray} )
+    }
+
     displayCustomers = () => {
-        return this.state.customers.map( (customer) => {
+        return this.state.customers.map( (customer, index) => {
             return (
                 <tr key={customer.id}>
                     <td>{customer.id}</td>
-                    <td><img src={customer.photo} alt="Customer"/></td>
+                    <td><img src={customer.photo} alt="Customer" />
+                        <div>
+                            <button
+                                className="btn btn-secondary btn-sm"
+                                onClick={ () => {this.changePic(customer, index)} }>Change Picture</button>
+                        </div></td>
                     <td>{customer.name}</td>
                     <td>{customer.address.city}</td>
                     <td>{this.getPhoneNumber(customer)}</td>
@@ -64,4 +76,4 @@ class MainContent extends Component {
     };
 }
 
-export default MainContent;
+export default CustomersList;
