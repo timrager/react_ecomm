@@ -8,44 +8,7 @@ class ShoppingCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: [
-                {
-                    id: 1,
-                    productName: "iPhone",
-                    price: 999,
-                    quantity: 0
-                },
-                {
-                    id: 2,
-                    productName: "iPad Pro",
-                    price: 1499,
-                    quantity: 0
-                },
-                {
-                    id: 3,
-                    productName: "MacBook Air",
-                    price: 1099,
-                    quantity: 0
-                },
-                {
-                    id: 4,
-                    productName: "MacBook Pro",
-                    price: 2999,
-                    quantity: 0
-                },
-                {
-                    id: 5,
-                    productName: "LG 4K 28-inch Monitor",
-                    price: 799,
-                    quantity: 0
-                },
-                {
-                    id: 6,
-                    productName: "AirPods Pro",
-                    price: 299,
-                    quantity: 0
-                }
-            ]
+            products: []
         }
     }
 
@@ -67,8 +30,21 @@ class ShoppingCart extends Component {
         )
     }
 
-    componentDidMount() {
-        console.log("ShoppingCart mounted")
+    componentDidMount = async () => {
+
+        let response = await fetch("http://localhost:3000/products", {method:"GET"})
+        
+        let allProducts = await response.json()
+
+        this.setState({ products: allProducts })
+
+        // fetch("http://localhost:3000/products")
+        //     .then((response) => {
+        //         response.json()
+        //             .then(allProds => {
+        //                 this.setState({ products: allProds })
+        //         })
+        //     }) 
     }
 
     componentDidUpdate(prevProps, prevState) {

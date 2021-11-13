@@ -6,7 +6,8 @@ class Login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            message: ''
         }
     }
 
@@ -23,14 +24,25 @@ class Login extends Component {
                     <input type="password" className="form-control" value={this.state.password} onChange={(event) => { this.setState({ password: event.target.value }); }}/>
                 </div>
                 <div>
-                    <button className="btn btn-primary" onClick={this.onLoginClick}>Login</button>
+                    <button className="btn btn-primary m-1" onClick={this.onLoginClick}>Login</button>
+                    { this.state.message }
                 </div>
             </div>
         )
     }
 
-    onLoginClick = () => {
-        console.log(this.state)
+
+    onLoginClick = async () => {
+
+        let response = await fetch(`http://localhost:3000/users?email=${this.state.email}&password=${this.state.password}`, {method: "GET"});
+
+        let body = await response.json()
+
+        if (body.length > 0) {
+            this.setState({ message: <span className="text-success">Successful</span> })
+            } else {
+                this.setState({ message: <span className="text-danger">Failed</span> })
+            }
     }
 }
 
